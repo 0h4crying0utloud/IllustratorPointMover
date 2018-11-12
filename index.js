@@ -1,3 +1,88 @@
+
+if (!Object.keys) {
+    Object.keys = (function() {
+      'use strict';
+      var hasOwnProperty = Object.prototype.hasOwnProperty,
+          hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString'),
+          dontEnums = [
+            'toString',
+            'toLocaleString',
+            'valueOf',
+            'hasOwnProperty',
+            'isPrototypeOf',
+            'propertyIsEnumerable',
+            'constructor'
+          ],
+          dontEnumsLength = dontEnums.length;
+  
+      return function(obj) {
+        if (typeof obj !== 'function' && (typeof obj !== 'object' || obj === null)) {
+          throw new TypeError('Object.keys called on non-object');
+        }
+  
+        var result = [], prop, i;
+  
+        for (prop in obj) {
+          if (hasOwnProperty.call(obj, prop)) {
+            result.push(prop);
+          }
+        }
+  
+        if (hasDontEnumBug) {
+          for (i = 0; i < dontEnumsLength; i++) {
+            if (hasOwnProperty.call(obj, dontEnums[i])) {
+              result.push(dontEnums[i]);
+            }
+          }
+        }
+        return result;
+      };
+    }());
+  }
+
+function stringify(val) {
+    switch(typeof val) {
+        case 'string':
+        case 'number': 
+        case 'boolean':
+            return '"' + val + '"';
+            break;
+        case 'function':
+            return '';
+            break;
+        case 'object':
+            if (val instanceof Array) {                
+                var arr_items = [];
+                for (var i=0; i<val.length;i++) {
+                    arr_items.push(stringify(val[i]));
+                }
+                return "[" + arr_items.join(',') + "]";
+            } else if (val instanceof Date)  {
+                return '';
+            } else if (val === null) {
+                return '';
+            } else {
+                var obj_keys = Object.keys(val);
+                if (obj_keys.length > 0) {
+                    var obj_params = [];
+                    for (var i=0; i<obj_keys.length;i++) {
+                        if (obj_keys[i] != "parent") {
+                            obj_params.push('"' + obj_keys[i] + '":' + stringify(val[obj_keys[i]]));
+                        }
+                    }
+                    return "{" + obj_params.join(',') + "}";
+                } else {
+                    return '"' + val + '"';
+                }
+            }
+            break;
+        default:
+            return val;                      
+    }
+}
+
+
+
 /**
  * @fileoverview A simple script and utilities for moving selected point in Adobe Illustrator.
  * WARNING: ADOBE SCRIPTS ONLY SUPPORT ~JAVASCRIPT 1.5!! Worse yet the support script software
@@ -154,40 +239,79 @@ var allPoints = [];
 var currentSelectedPath;
 var tmpAnchor;
 var allPointsStr = "";
+var testStr = "selectedPaths.length: " + selectedPaths.length;
+var currentPointType;
+
+var curveGroups = [];
+var isNewGroup = false;
+var currentGroup = [];
+var point;
+
+
 for(var i=0; i<selectedPaths.length; i++) {
     selectedPathPoints = selectedPaths[i].selectedPathPoints;
     allPointsStr = allPointsStr + "\n";
-    for(var j=0; j<selectedPathPoints.length; j++) {
+    testStr += "\n------------------------------------------"
+    testStr += "\nselectedPaths[" + i + "].selectedPathPoints.length:" + selectedPaths[i].selectedPathPoints.length;
+    testStr += "\n------------------------------------------"
+    for(var j=0, k=0; j<selectedPathPoints.length; j++) {
         tmpAnchor = selectedPathPoints[j].anchor;
-        allPoints.push(createPoint(tmpAnchor[0], tmpAnchor[1], i, selectedPathPoints[j]));
-        allPointsStr = allPointsStr + "\n" + tmpAnchor[0] + "," + tmpAnchor[1] + " - " + selectedPathPoints[j].pointType.toString().charAt(10);
+        currentPointType = selectedPathPoints[j].pointType.toString().charAt(10)
+
+        if (currentPointType === 'C') {
+            testStr += '\n------'
+            isNewGroup = true;
+        }
+
+        if (currentPointType === 'S') {
+            if (isNewGroup) {
+                if (currentGroup.length > 0) {
+                    //alert("currgroup:" + currentGroup);
+                    curveGroups.push(currentGroup);
+                    currentGroup = [];
+                }
+            }
+            testStr += "\n selectedPathPoints[" + j + "]:";
+            testStr +=  tmpAnchor[0] + "," + tmpAnchor[1] + " - " + currentPointType;
+            point = createPoint(tmpAnchor[0], tmpAnchor[1], i, selectedPathPoints[j]);
+            allPoints.push(point);
+            currentGroup.push(point);
+            allPointsStr = allPointsStr + "\n" + tmpAnchor[0] + "," + tmpAnchor[1] + " - " + currentPointType;
+            isNewGroup = false;
+        }
     }
+    curveGroups.push(currentGroup);
+
 }   
 //alert(allPoints.length + allPointsStr);
+
+alert(curveGroups.length);
+alert(stringify(curveGroups));
+
 
 /////////////////////////////////////////////
 // Find groups of overlapped points
 /////////////////////////////////////////////
 
-var allPointGroups = [];
-var currentPoint;
-var allPointGroupsStr = "";
-for(i=0; i<allPoints.length; i++) { 
-    if (allPoints[i] !== null) {
-        currentPoint = allPoints[i];
-        allPointGroups.push([currentPoint]);  
-        allPointGroupsStr = allPointGroupsStr + "\n\n" + currentPoint.ref.anchor[0] + "," + currentPoint.ref.anchor[1] + " - " + currentPoint.ref.pointType + "\n";
-        for (j=(i+1); j<allPoints.length; j++) {
-            if (allPoints[j] !== null) {
-                if (isOverlapped(currentPoint, allPoints[j] ) ) {
-                    allPointGroups[allPointGroups.length-1].push(allPoints[j]);
-                    allPointGroupsStr = allPointGroupsStr + allPoints[j].ref.anchor[0] + "," + allPoints[j].ref.anchor[1] + " - " + allPoints[j].ref.pointType   + "\n";
-                    allPoints[j] = null;
-                }
-            }
-        }
-    }
-}
+// var allPointGroups = [];
+// var currentPoint;
+// var allPointGroupsStr = "";
+// for(i=0; i<allPoints.length; i++) { 
+//     if (allPoints[i] !== null) {
+//         currentPoint = allPoints[i];
+//         allPointGroups.push([currentPoint]);  
+//         allPointGroupsStr = allPointGroupsStr + "\n\n" + currentPoint.ref.anchor[0] + "," + currentPoint.ref.anchor[1] + " - " + currentPoint.ref.pointType + "\n";
+//         for (j=(i+1); j<allPoints.length; j++) {
+//             if (allPoints[j] !== null) {
+//                 if (isOverlapped(currentPoint, allPoints[j] ) ) {
+//                     allPointGroups[allPointGroups.length-1].push(allPoints[j]);
+//                     allPointGroupsStr = allPointGroupsStr + allPoints[j].ref.anchor[0] + "," + allPoints[j].ref.anchor[1] + " - " + allPoints[j].ref.pointType   + "\n";
+//                     allPoints[j] = null;
+//                 }
+//             }
+//         }
+//     }
+// }
 
 
 /////////////////////////////////////////////
@@ -195,5 +319,5 @@ for(i=0; i<allPoints.length; i++) {
 /////////////////////////////////////////////
 
 //alert("test1: " + printPointGroupList(allPointGroups));
-movePoints(allPointGroups)
+//movePoints(allPointGroups)
 //alert("test1: " + printPointGroupList(allPointGroups));
