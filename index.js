@@ -1,4 +1,32 @@
 
+/**
+ * @fileoverview A simple script and utilities for moving selected point in Adobe Illustrator.
+ * WARNING: ADOBE SCRIPTS ONLY SUPPORT ~JAVASCRIPT 1.5!! Worse yet the support script software
+ * is dead (probably useful for debugging?). This will explain so weirdness.  
+ * Don't judge me!!!  
+ * @author 0h4crying0utloud
+ * 
+ * @dependencies
+ * - JAVASCRIPT 1.5 or less only!
+ * - Adobe Script runner for VS code (https://github.com/rendertom/VSCode-Adobe-Script-Runner)
+ * - Adobe Illustrator 
+ */
+
+var SPREAD_AMT = 1;
+
+///////////////////////////
+// Polyfills
+///////////////////////////
+
+// Math.trunc polyfill
+if (!Math.trunc) {
+	Math.trunc = function(v) {
+		v = +v;
+		return (v - v % 1)   ||   (!isFinite(v) || v === 0 ? v : v < 0 ? -0 : 0);
+	};
+}
+
+// Object.keys polyfill
 if (!Object.keys) {
     Object.keys = (function() {
       'use strict';
@@ -40,6 +68,7 @@ if (!Object.keys) {
     }());
   }
 
+// Simplified stringify polyfill
 function stringify(val) {
     switch(typeof val) {
         case 'string':
@@ -79,34 +108,6 @@ function stringify(val) {
         default:
             return val;                      
     }
-}
-
-
-
-/**
- * @fileoverview A simple script and utilities for moving selected point in Adobe Illustrator.
- * WARNING: ADOBE SCRIPTS ONLY SUPPORT ~JAVASCRIPT 1.5!! Worse yet the support script software
- * is dead (probably useful for debugging?). This will explain so weirdness.  
- * Don't judge me!!!  
- * @author 0h4crying0utloud
- * 
- * @dependencies
- * - JAVASCRIPT 1.5 or less only!
- * - Adobe Script runner for VS code (https://github.com/rendertom/VSCode-Adobe-Script-Runner)
- * - Adobe Illustrator 
- */
-
-var SPREAD_AMT = 1;
-
-///////////////////////////
-// Polyfills
-///////////////////////////
-
- if (!Math.trunc) {
-	Math.trunc = function(v) {
-		v = +v;
-		return (v - v % 1)   ||   (!isFinite(v) || v === 0 ? v : v < 0 ? -0 : 0);
-	};
 }
 
 
