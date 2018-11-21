@@ -66,7 +66,7 @@ if (!Object.keys) {
         return result;
       };
     }());
-  }
+}
 
 // Simplified stringify polyfill
 function stringify(val) {
@@ -110,6 +110,42 @@ function stringify(val) {
     }
 }
 
+// filter polyfill
+if (!Array.prototype.filter){
+    Array.prototype.filter = function(func, thisArg) {
+      'use strict';
+      if ( ! ((typeof func === 'Function' || typeof func === 'function') && this) )
+          throw new TypeError();
+     
+      var len = this.length >>> 0,
+          res = new Array(len), // preallocate array
+          t = this, c = 0, i = -1;
+      if (thisArg === undefined){
+        while (++i !== len){
+          // checks to see if the key was set
+          if (i in this){
+            if (func(t[i], i, t)){
+              res[c++] = t[i];
+            }
+          }
+        }
+      }
+      else{
+        while (++i !== len){
+          // checks to see if the key was set
+          if (i in this){
+            if (func.call(thisArg, t[i], i, t)){
+              res[c++] = t[i];
+            }
+          }
+        }
+      }
+     
+      res.length = c; // shrink down array to proper size
+      return res;
+    };
+}
+
 
 ///////////////////////////
 // Utilities
@@ -125,18 +161,7 @@ function stringify(val) {
  * @return point object
  */
 function createPoint(x, y, group, ref) {
-    return {"x": x, "y": y, "group": group, "ref": ref};
-}
-
-/**
- * Checks to see if two points are overlapped
- * @param (point object) point1 
- * @param (point object) point2
- * @return (boolean) 
- */
-function isOverlapped(point1, point2) {
-    return  Math.trunc(point1.x) == Math.trunc(point2.x) &&
-            Math.trunc(point1.y) == Math.trunc(point2.y);
+    return {"id":Math.random(), "x": x, "y": y, "group": group, "ref": ref};
 }
 
 /**
@@ -229,6 +254,57 @@ function movePoints(groupList) {
 }
 
 
+/**
+ * Checks to see if two points are overlapped
+ * @param (point object) point1 
+ * @param (point object) point2
+ * @return (boolean) 
+ */
+function isOverlapped(point1, point2) {
+    return  point1 && point2 &&
+            point1.id !== point2.id &&
+            Math.trunc(point1.x) == Math.trunc(point2.x) &&
+            Math.trunc(point1.y) == Math.trunc(point2.y);
+}
+
+function findAndRemoveOverlap(pointObj, sideGroups) {
+    var currentPoint;
+    var sidePoints;
+    for(var i=0; i<sideGroups.length; i++) {
+        sidePoints = sideGroups[i];
+        for(var j=0; j<sidePoints.length; j++) {
+            if (sidePoints[j]) {
+                currentPoint = sidePoints[j][0];
+                if (isOverlapped(pointObj, currentPoint)) {
+                    //console.log("overlap found:  sideGroups[" + i + "][" + j + "]");
+                    sidePoints[j] = null;
+                    return currentPoint;
+                }
+            }
+        }
+        sideGroups[i] = sideGroups[i].filter( function(x) {return x})
+    }
+    return null;
+}
+
+function combineOverlaps(sideGroups) {
+    // var sidePoints;
+    var overlapPoint;
+    for(var i=0; i<sideGroups.length; i++) {
+        sidePoints = sideGroups[i];
+        for(var j=0; j<sidePoints.length; j++) {
+            if (sidePoints[j]) {
+                overlapPoint = findAndRemoveOverlap(sidePoints[j][0], sideGroups);
+                //overlapPoint = null;
+                if (overlapPoint) {
+                    sidePoints[j].push(overlapPoint);
+                }
+            } 
+        }
+
+    }
+    return sideGroups;
+}
 
 
 /////////////////////////////////////////////
@@ -248,6 +324,7 @@ var isNewGroup = false;
 var currentGroup = [];
 var point;
 
+alert("selectedPaths.length:" + selectedPaths.length);
 
 for(var i=0; i<selectedPaths.length; i++) {
     selectedPathPoints = selectedPaths[i].selectedPathPoints;
@@ -262,32 +339,53 @@ for(var i=0; i<selectedPaths.length; i++) {
         if (currentPointType === 'C') {
             testStr += '\n------'
             isNewGroup = true;
+            if (currentGroup.length > 0) {
+                //alert("currgroup:" + currentGroup);
+                curveGroups.push(currentGroup);
+                currentGroup = [];
+            }
         }
 
         if (currentPointType === 'S') {
-            if (isNewGroup) {
-                if (currentGroup.length > 0) {
-                    //alert("currgroup:" + currentGroup);
-                    curveGroups.push(currentGroup);
-                    currentGroup = [];
-                }
-            }
             testStr += "\n selectedPathPoints[" + j + "]:";
             testStr +=  tmpAnchor[0] + "," + tmpAnchor[1] + " - " + currentPointType;
             point = createPoint(tmpAnchor[0], tmpAnchor[1], i, selectedPathPoints[j]);
             allPoints.push(point);
-            currentGroup.push(point);
+            currentGroup.push([point]);
             allPointsStr = allPointsStr + "\n" + tmpAnchor[0] + "," + tmpAnchor[1] + " - " + currentPointType;
             isNewGroup = false;
         }
     }
-    curveGroups.push(currentGroup);
+    if (currentGroup.length > 0) {
+        curveGroups.push(currentGroup);
+    }
 
 }   
 //alert(allPoints.length + allPointsStr);
 
-alert(curveGroups.length);
-alert(stringify(curveGroups));
+alert("curveGroups.length" + curveGroups.length);
+alert(stringify(combineOverlaps(curveGroups)));
+
+
+// curveGroups: [
+//     sideGroup.0: [
+//         point.0: {...},
+//         point.1: {...},
+//         point.2: {...},
+//         point.3: {...} 
+//     ]
+// ]
+
+// curveGroups: [
+//     sideGroup.0: [
+//         points: [
+//             point.0: {...},
+//             point.1: {...},
+//             point.2: {...},
+//             point.3: {...} 
+//         ]
+//     ]
+// ]
 
 
 /////////////////////////////////////////////

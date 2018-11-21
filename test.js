@@ -1,0 +1,51 @@
+var mock = [[[{"id":"0.90665998961776","x":"459.470823597328","y":"-124.295114395462","group":"0","ref":{"anchor":["459.470823597328","-124.295114395462"],"leftDirection":["462.097815302668","-124.915447728794"],"rightDirection":["457.722259857652","-123.882003284351"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.23445260152221","x":"458.1417042915","y":"-120.627781062132","group":"0","ref":{"anchor":["458.1417042915","-120.627781062132"],"leftDirection":["457.274156930664","-121.827781062131"],"rightDirection":["462.618815289505","-114.436225506583"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.44487561844289","x":"452.848037758567","y":"-120.123669951021","group":"0","ref":{"anchor":["452.848037758567","-120.123669951021"],"leftDirection":["449.398815623485","-113.866114395472"],"rightDirection":["454.529482160533","-123.174003284352"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.02452265145257","x":"451.143482246074","y":"-123.902669951018","group":"0","ref":{"anchor":["451.143482246074","-123.902669951018"],"leftDirection":["452.345148882383","-123.73600328435"],"rightDirection":["449.559037841658","-124.122447728796"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}]],[[{"id":"0.15220315521583","x":"443.871037985355","y":"-114.848558839914","group":"0","ref":{"anchor":["443.871037985355","-114.848558839914"],"leftDirection":["444.090704646473","-116.432781062136"],"rightDirection":["443.704482434006","-113.646669951027"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.07843090360984","x":"440.092260303041","y":"-113.143669951029","group":"0","ref":{"anchor":["440.092260303041","-113.143669951029"],"leftDirection":["443.142482448206","-111.462336617697"],"rightDirection":["433.834371572246","-116.59322550658"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.18819758435711","x":"440.5961491792","y":"-107.849781062145","group":"0","ref":{"anchor":["440.5961491792","-107.849781062145"],"leftDirection":["434.404704891171","-103.372447728816"],"rightDirection":["441.796260259993","-108.71744772881"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.03680176287889","x":"444.263593530994","y":"-106.520669951035","group":"0","ref":{"anchor":["444.263593530994","-106.520669951035"],"leftDirection":["443.850482430318","-108.269447728811"],"rightDirection":["444.883704626438","-103.894003284371"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}]],[[{"id":"0.52722899336368","x":"450.584371149089","y":"-97.6342255065993","group":"0","ref":{"anchor":["450.584371149089","-97.6342255065993"],"leftDirection":["447.957490264009","-97.0141143954879"],"rightDirection":["452.333371104904","-98.0472255065979"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.13769558956847","x":"451.913482226622","y":"-101.301225506597","group":"0","ref":{"anchor":["451.913482226622","-101.301225506597"],"leftDirection":["452.781148871369","-100.101447728819"],"rightDirection":["447.436482339725","-107.493114395478"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.24977495474741","x":"457.207259870662","y":"-101.805558839927","group":"0","ref":{"anchor":["457.207259870662","-101.805558839927"],"leftDirection":["460.65692645018","-108.063114395478"],"rightDirection":["455.526037690914","-98.7552255065984"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.96766639407724","x":"458.912259827588","y":"-98.0267810621554","group":"0","ref":{"anchor":["458.912259827588","-98.0267810621554"],"leftDirection":["457.710148746846","-98.1932255065985"],"rightDirection":["460.496259787573","-97.8070032843771"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}]],[[{"id":"0.56909282924607","x":"466.183704088333","y":"-107.080447728811","group":"0","ref":{"anchor":["466.183704088333","-107.080447728811"],"leftDirection":["465.964037427217","-105.496225506593"],"rightDirection":["466.350259639681","-108.2823366177"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.74318559234962","x":"469.962592881757","y":"-108.785336617699","group":"0","ref":{"anchor":["469.962592881757","-108.785336617699"],"leftDirection":["466.912259625484","-110.466669951031"],"rightDirection":["476.220370501444","-105.33589217326"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.72025643615052","x":"469.458704005598","y":"-114.079225506583","group":"0","ref":{"anchor":["469.458704005598","-114.079225506583"],"leftDirection":["475.650037182519","-118.55633661769"],"rightDirection":["468.258481813697","-113.211558839917"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.349928018637","x":"465.791148542696","y":"-115.408336617693","group":"0","ref":{"anchor":["465.791148542696","-115.408336617693"],"leftDirection":["466.204259643369","-113.659558839918"],"rightDirection":["465.17103744725","-118.035336617691"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}]],[[{"id":"0.24021197063848","x":"441.696696286635","y":"-139.502003284337","group":"1","ref":{"anchor":["441.696696286635","-139.502003284337"],"leftDirection":["441.076585191191","-142.129003284332"],"rightDirection":["442.109807387311","-137.753225506558"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.24259240087122","x":"445.364140638429","y":"-138.173003284337","group":"1","ref":{"anchor":["445.364140638429","-138.173003284337"],"leftDirection":["444.163918446528","-137.305225506561"],"rightDirection":["451.555584926458","-142.650003284331"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.2504833410494","x":"445.868029514588","y":"-132.879003284339","group":"1","ref":{"anchor":["445.868029514588","-132.879003284339"],"leftDirection":["452.125926896735","-129.429558839902"],"rightDirection":["442.817807369423","-134.560447728785"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.87351497728378","x":"442.089260230079","y":"-131.174114395457","group":"1","ref":{"anchor":["442.089260230079","-131.174114395457"],"leftDirection":["442.255807383623","-132.376003284342"],"rightDirection":["441.869474060049","-129.589892173235"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}]],[[{"id":"0.16623004479334","x":"451.143473825759","y":"-123.902003284351","group":"1","ref":{"anchor":["451.143473825759","-123.902003284351"],"leftDirection":["449.558918310235","-124.121669951019"],"rightDirection":["452.345140462068","-123.735225506571"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.82836414221674","x":"452.848029338251","y":"-120.122892173244","group":"1","ref":{"anchor":["452.848029338251","-120.122892173244"],"leftDirection":["454.529695962434","-123.173114395464"],"rightDirection":["449.398807203168","-113.865336617695"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.31614471971989","x":"458.141918093401","y":"-120.627003284353","group":"1","ref":{"anchor":["458.141918093401","-120.627003284353"],"leftDirection":["462.619029091406","-114.435447728805"],"rightDirection":["457.274362559761","-121.827003284354"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}],[{"id":"0.44430680619553","x":"459.471029170934","y":"-124.294225506572","group":"1","ref":{"anchor":["459.471029170934","-124.294225506572"],"leftDirection":["457.722593563396","-123.881225506573"],"rightDirection":["462.098029104567","-124.914669951018"],"pointType":"PointType.SMOOTH","selected":"PathPointSelection.ANCHORPOINT","typename":"PathPoint"}}]]];
+
+
+
+function isOverlapped(point1, point2) {
+    return  point1 && point2 &&
+            point1.id !== point2.id &&
+            Math.trunc(point1.x) == Math.trunc(point2.x) &&
+            Math.trunc(point1.y) == Math.trunc(point2.y);
+}
+
+function findAndRemoveOverlap(pointObj, sideGroups) {
+    var currentPoint;
+    var sidePoints;
+    for(var i=0; i<sideGroups.length; i++) {
+        sidePoints = sideGroups[i];
+        for(var j=0; j<sidePoints.length; j++) {
+            if (sidePoints[j]) {
+                currentPoint = sidePoints[j][0];
+                if (isOverlapped(pointObj, currentPoint)) {
+                    console.log("overlap found:  sideGroups[" + i + "][" + j + "]");
+                    sidePoints[j] = null;
+                    return currentPoint;
+                }
+            }
+        }
+        sideGroups[i] = sideGroups[i].filter( function(x) {return x})
+    }
+    return null;
+}
+
+function combineOverlaps(sideGroups) {
+    // var sidePoints;
+    var overlapPoint;
+    for(var i=0; i<sideGroups.length; i++) {
+        sidePoints = sideGroups[i];
+        for(var j=0; j<sidePoints.length; j++) {
+            if (sidePoints[j]) {
+                overlapPoint = findAndRemoveOverlap(sidePoints[j][0], sideGroups);
+                //overlapPoint = null;
+                if (overlapPoint) {
+                    sidePoints[j].push(overlapPoint);
+                }
+            } 
+        }
+
+    }
+    return sideGroups;
+}
+
+console.log(JSON.stringify(combineOverlaps(mock)));
