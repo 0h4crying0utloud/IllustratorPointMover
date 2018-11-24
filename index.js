@@ -196,38 +196,6 @@ function stdRandRange() {
     return getRandom(SPREAD_AMT*-1, SPREAD_AMT);
 }
 
-
-/**
- * Debugging with AI DOM is terrible, I've been alerting tranformations until
- * I can figure out a better way. There's no console. Script supporting software is not 
- * compatible with modern macOS. 
- * @param (array) groupList - a list of point groups
- * @return (String) that represents the state of the groupList
- */
-function printPointGroupList(groupList) {
-    var currentPoint;
-    var groupStr = "";
-    for(i=0; i<groupList.length; i++) {
-        groupStr = groupStr + "\n";
-        for (j=0; j<groupList[i].length; j++) {
-            currentPoint = groupList[i][j];
-            groupStr = groupStr + "\n" + 
-                currentPoint.ref.anchor[0] + "," + currentPoint.ref.anchor[1] + " - " + currentPoint.ref.pointType.toString().charAt(10) + "\n" +
-                "group:" + currentPoint.group + "\n";    
-                
-            // just keepint this handy for various debugging.
-            // currentPoint.ref.anchor[0] + "," + currentPoint.ref.anchor[1] + " - " + currentPoint.ref.pointType.toString().charAt(10) + "\n" +
-            // "left:" + currentPoint.ref.leftDirection[0] + "," + currentPoint.ref.leftDirection[1] + "\n" +
-            // "rigt:" + currentPoint.ref.rightDirection[0] + "," + currentPoint.ref.rightDirection[1] + "\n" +
-            // "group:" + currentPoint.group + "\n" + 
-            // "polarity:" + currentPoint.ref.parent.polarity + "\n";
-
-            }
-    }
-    return groupStr;
-}
-
-
 /**
  * This is mainly what I wanted from this script - just move each non-corner point and angle handles 
  * by some random amount. Points in the same group must move together. 
@@ -391,16 +359,6 @@ alert("curveGroups.length" + curveGroups.length);
 alert(stringify(combineOverlaps(curveGroups)));
 
 
-
-// curveGroups: [
-//     sideGroup.0: [
-//         point.0: {...},
-//         point.1: {...},
-//         point.2: {...},
-//         point.3: {...} 
-//     ]
-// ]
-
 // curveGroups: [
 //     sideGroup.0: [
 //         points: [
@@ -411,37 +369,3 @@ alert(stringify(combineOverlaps(curveGroups)));
 //         ]
 //     ]
 // ]
-
-
-/////////////////////////////////////////////
-// Find groups of overlapped points
-/////////////////////////////////////////////
-
-// var allPointGroups = [];
-// var currentPoint;
-// var allPointGroupsStr = "";
-// for(i=0; i<allPoints.length; i++) { 
-//     if (allPoints[i] !== null) {
-//         currentPoint = allPoints[i];
-//         allPointGroups.push([currentPoint]);  
-//         allPointGroupsStr = allPointGroupsStr + "\n\n" + currentPoint.ref.anchor[0] + "," + currentPoint.ref.anchor[1] + " - " + currentPoint.ref.pointType + "\n";
-//         for (j=(i+1); j<allPoints.length; j++) {
-//             if (allPoints[j] !== null) {
-//                 if (isOverlapped(currentPoint, allPoints[j] ) ) {
-//                     allPointGroups[allPointGroups.length-1].push(allPoints[j]);
-//                     allPointGroupsStr = allPointGroupsStr + allPoints[j].ref.anchor[0] + "," + allPoints[j].ref.anchor[1] + " - " + allPoints[j].ref.pointType   + "\n";
-//                     allPoints[j] = null;
-//                 }
-//             }
-//         }
-//     }
-// }
-
-
-/////////////////////////////////////////////
-// Now just move them around!
-/////////////////////////////////////////////
-
-//alert("test1: " + printPointGroupList(allPointGroups));
-//movePoints(allPointGroups)
-//alert("test1: " + printPointGroupList(allPointGroups));
