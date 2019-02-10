@@ -206,43 +206,6 @@ function stdRandRange() {
     return getRandomInRange(SPREAD_RADIUS*-1, SPREAD_RADIUS) * SPREAD_MUTIPLE;
 }
 
-/**
- * This is mainly what I wanted from this script - just move each non-corner point and angle handles 
- * by some random amount. Points in the same group must move together. 
- * @param (array) groupList - a list of point groups
- * @return SIDE_EFFECT
- */
-// function movePoints(groupList) {
-//     var currentPoint, firstPoint, secondPoint;
-//     var groupStr = "";
-//     var xoffset, yoffset, first_anchor, first_leftDirection, first_rightDirection;
-//     for(i=0; i<groupList.length; i++) {
-//         firstPoint = groupList[i][0];
-
-//         if (firstPoint.ref.pointType == "PointType.SMOOTH") {
-//             secondPoint = groupList[i][1];
-//             xoffset = stdRandRange();
-//             yoffset = stdRandRange();
-
-//             first_anchor = [firstPoint.ref.anchor[0] + xoffset, firstPoint.ref.anchor[1] + yoffset];
-//             first_leftDirection = [firstPoint.ref.leftDirection[0] + xoffset, firstPoint.ref.leftDirection[1] + yoffset];
-//             first_rightDirection = [firstPoint.ref.rightDirection[0] + xoffset, firstPoint.ref.rightDirection[1] + yoffset]
-
-//             firstPoint.ref.anchor =  first_anchor;
-//             firstPoint.ref.leftDirection = first_leftDirection;
-//             firstPoint.ref.rightDirection = first_rightDirection;
-
-//             if (secondPoint) {
-//                 secondPoint.ref.anchor =  first_anchor;
-//                 secondPoint.ref.leftDirection = first_rightDirection;
-//                 secondPoint.ref.rightDirection = first_leftDirection;
-//             } 
-
-//         }
-//     }
-//     return groupStr;
-// }
-
 function moveCurvePoints(sides) {
     var sidePoints, pointGroup, overlappedPoint;
     var anchor, leftDirection, rightDirection;
@@ -262,13 +225,9 @@ function moveCurvePoints(sides) {
                 first_leftDirection = [firstPoint.ref.leftDirection[0] + xoffset, firstPoint.ref.leftDirection[1] + yoffset];
                 first_rightDirection = [firstPoint.ref.rightDirection[0] + xoffset, firstPoint.ref.rightDirection[1] + yoffset];
                 
-                // console.log("firstPoint.ref.leftDirection[0]: " + (typeof firstPoint.ref.leftDirection[0]));
-                // console.log("xoffset: " + (typeof xoffset));
-
                 firstPoint.ref.anchor =  first_anchor;
                 firstPoint.ref.leftDirection = first_leftDirection;
                 firstPoint.ref.rightDirection = first_rightDirection;
-                //console.log("moved point " + i + "," + j + "," + k + " to: x=" + currentPoint.ref.leftDirection + ", y=" + currentPoint.ref.rightDirection);
                 
                 overlappedPoint = sidePoints[j][1];
                 if (overlappedPoint) {
@@ -402,17 +361,15 @@ try {
     AI_SelectedPaths = mock;
 }
 
-
-//alert(stringify(AI_SelectedPaths));
-
-
 var curveGroups = getSideGroups(AI_SelectedPaths);
 
+// Only useful for testing
 // console.log("curveGroups.length" + curveGroups.length);
 // console.log(JSON.stringify(moveCurvePoints(combineOverlaps(curveGroups))));
 
-alert("curveGroups.length" + curveGroups.length);
-alert(stringify(moveCurvePoints(combineOverlaps(curveGroups))));
+// only useful for runnin in AI
+// alert("curveGroups.length" + curveGroups.length);
+// alert(stringify(moveCurvePoints(combineOverlaps(curveGroups))));
 
 
 // curveGroups: [
